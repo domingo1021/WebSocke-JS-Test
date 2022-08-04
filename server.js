@@ -11,15 +11,15 @@ const server = http.createServer(app)
 const webSocket = new SocketServer({server});
 
 webSocket.on('connection', (ws, req) =>{
-    const ip = req.headers.origin
-    // const ip = req.headers['x-forwarded-for']
-    console.log(`Client connection ${ip}`);
+    const inboundIP = req.header('x-forwarded-for') || req.socket.remoteAddress;
+    console.log(inboundIP)
+    console.log(`Client connection ${inboundIP}`);
     ws.send("Hello wolrd")
     ws.on('message', (msg)=>{
         console.log(msg) // <Buffer 68 65 6c 6c 6f 20 77 6f 72 6c 64>
         webSocket.clients.forEach((client)=>{
             if(client !== ws && client.readyState === SocketServer.OPEN){
-                client.send(`Got message from ${ip}, ${msg}`)
+                client.send(`Got message from ${inboundIP}, ${msg}`)
             }
         })
     })
