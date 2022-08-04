@@ -1,4 +1,4 @@
-let socket = new WebSocket("ws://localhost:3003");
+let socket = new WebSocket("wss://domingoos.store");
 
 // send message from the form
 document.getElementById("submit-btn").addEventListener('click', ()=>{
