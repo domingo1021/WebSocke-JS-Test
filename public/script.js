@@ -12,5 +12,5 @@ document.getElementById("submit-btn").addEventListener('click', ()=>{
   
     let messageElem = document.createElement('div');
     messageElem.textContent = message;
-    document.getElementById('messages').prepend(messageElem);
+    document.getElementById('messages').append(messageElem);
   }
